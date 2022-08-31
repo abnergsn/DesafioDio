@@ -1,0 +1,161 @@
+git e github
+nao tem interface grafica
+linha de comando para interagir com o programas
+comandos basicos
+windows                             linux
+dir - listar                        ls - listar
+cd- navegar                         cd - navegar  (ex: cd/local especifico no sistema)
+cd .. - voltar uma pasta            cd .. - voltar uma pasta
+cls - limpar tela                   clear - limpar tela
+TAB - autocompletar
+mkdir - criar pasta                 mkdir - criar pasta
+rmdir - apagar repositorio          rm -rf - apagar itensTO
+echo - string
+control+l - limpart tela
+TOPICOS FUNDAMENTAIS PARA ENTENDER COMO O GIT FUNCIONA
+-SHA1 (Secure hash algorithm, é um conjunto de funções hash criptograficas projetadas pela NSA (agencia de segurança nacional dos EUA)
+a encriptação gera um conjunto de caracteres identificador de 40 digitos
+uma forma curta de representar um arquivo
+-Objetos fundamentais 
+BLOBS 
+\0
+Ola Mundo
+echo -e 'blob 9\0conteudo'
+contem metadados nos objetos como tipo do objeto, tamanho, conteudo do arquivo
+
+TREES 
+\0
+blob sa4d8s texto.txt
+as trees armazenam blobs
+contem metadados e tambem guarda commits, aponta pra um blob. Responsavel por montar estrutura
+uma arvore, pode apontar para outra arvores ou para blobs
+
+COMMITS
+ commit refere-se ao processo de tornar permanente um conjunto de alterações, ou seja, de efetivar as alterações. 
+Um uso comum é a conclusão de uma transação. Um commit é o ato de enviar e guardar, ou seja, enviar dados ou códigos para armazenamento em um banco de dados ou em um sistema de controle de versão.
+-Sistema distribuido
+-Segurança
+
+
+
+ untracked                            tracked  
+                  unmodified              modified                 staged
+ adicionar o arquivo ============================================> |                 
+                  |                       |                        |
+                  |editar arquivo==>      |                        |
+                  |                       |"Stage" o arquivo==>    |       
+<=remove o arquivo|                       |                        |
+                  |                       |                        |
+                  | <===================================== Commit  |     
+
+        
+staged = onde fica os arquivos que estao se preparando para fazer parte de outro agrupamento/commit ou realizar alguma ação
+
+git init
+git add
+git commit
+criar um repositorio
+-a - mostrar pasta/arquivos ocultos
+git remote -v listar os repositorios remotos
+
+resolvendo conflitos
+git push
+git pull
+git add* adicionar o arquivo para area de staging
+
+head é uma tag que aponta para o ultimo commit de uma branch
+git checkout -b nova branch
+git checkout "master" / mover 
+git merge nova-branch - fundir as branches
+
+branches  serve para fazer trabalhos paralelos originados de um determinado ponto dos nossos commits e depois conseguir reintegrar essas branches 
+git branch - mostra as branches criadas no nosso repositorio local
+git branch -m - mudar o nome da branch
+git branch -d - deleta a branch
+git stash save pega tudo que ta no stage e adiciona na caixinha 
+git stash list - lista
+git stash pop 1 passa os arquivos da "caixinha" stash e colocar os arquivos de volta na branch / passa o index da
+git stash clear - limpa o stash
+
+git log - historico 
+git log --oneline historico de commits de forma resumida
+git log --graph  grafico 
+
+reverter commits
+git revert  inverte o commit e remove o arquivo
+git reset   reverte o commite pelo sha1 tipo - git reset 8fs7lxc1
+                             ou pelo HEAD tipo - git reset HEAD~1
+
+git reset  -- soft  reverte os arquivos do commit para o index, volta para o staged
+git reset  -- mixed volta os arquivos para o estado anterior 
+git reset  -- hard  ele remove o arquivo 
+
+estruturar os commits
+por que me importar?
+melhor legibilidade do historico
+amigaval para novos desenvolvedores
+amigavel ao versionamento semantico
+
+commits atômicos
+*iniciando implementação do catalogo de produtos
+*concertando erros de gramática
+*muda tamanho do menu lateral
+*adiciona grid de imagens catalogo de produtos
+*adiciona CSS catalogo dos produtos
+*remove o estilo do footer 
+*arruma erro no menu lateral
+*finaliza implementação do catalogo de produto
+ 
+
+commits atomicos sao uma unidade sempre com inicio meio e fim
+ 
+portugues x ingles
+se tiver trabalhando em empresa brasileira faz em portugues 
+se tiver trabalhando com pessoas que não sao do brasil ai faz em ingles
+depende do sentido da empresa
+
+estrutura basica de um commit
+ assunto: Curto e compreensivel ate 50 caracteres começar com letra maiuscula naterminar em ponto escrito de formaimperativa
+ em ingles use o imperative mood
+ add a feature  added a feature 
+ modify an existing feature modified an existing feature 
+ remove a feature  removed a feature
+ if applied, this commit will...add/uptade/remove
+ em portugues use a voz imperativa
+ adiciona a funcionalidade x       
+ modifica uma funcionalidade existente
+ remove a funcionalidade y 
+ se aceito, esse commit... adiciona/ atualiza/ remove
+ corpo: adicione detalhes ao commit, tente quebrar a linha em 75 caracteres, identifique sua audiencia, explique tudo, use markdown
+   
+ rodapé: opcional - referencie assuntos relacionados
+
+Commits Semânticos conventional commits
+Semantic Versioning 
+   3 .   2  . 7
+major  minor patch
+https://semver.org/
+
+Conventional Commits
+A especificação do Conventional Commits é uma convenção simples para utilizar
+nas mensagens de commit. ela define um conjunto de regraas para criar um historico de commit explicito,
+o que facilita a criação de ferramentas automatizadas baseadas na especificação.
+Esta convenção se encaixa com o SemVer, descrevendo recursos, correções e modificações que 
+quebram a compatibilidade nas mensagens de commit
+https://www.conventionalcommits.org/
+
+<tipo>[escopo opcional]: <descrição>
+
+[corpo opcional]
+
+[rodapé(s) opcional(is)]
+
+https://npm.anvaka.com
+
+Um Fork, de forma resumida, é uma cópia de um repositório para o seu perfil que mantém um apontamento para o repositório no qual se originou. Dessa forma você tem uma cópia do repositório que irá trabalhar em seu próprio perfil podendo commitar código aonde quiser, ou quase isso.
+
+
+
+asdfsdf
+
+
