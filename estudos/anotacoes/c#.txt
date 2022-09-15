@@ -1,0 +1,431 @@
+c#
+é uma linguagem orientada a objeto e fortemente tipada
+a sintaxe do c# é similar a do c,c++ ou java
+suporta os conceitos de encapsulamento, herança e polimorfismo(OO)
+Os programas c# são executados no .NET, que inclui:
+CLR (Common Language Runtime)
+Conjunto unificado de bibliotecas de classes
+Como funciona?
+O codigo-fonte escrito em c# é compilado em uma linguagem intermediaria (IL)
+O codigo e os recursos de IL são armazenados no disco em um arquivo executavel chamado assembly, geramente com uma extensao exe. ou d.dll
+Quando o programa c# é executado, o assembly é carregado no CLR
+Em seguida o CRL executara a compilaçao just in time (JIT) para converter o codigo IL em instruçoes de maquina nativas
+O CLR tambem fornece outros serviços
+*garbage collector/ferramenta que coleta o lixo, valida, verifica objetos na memoria que nao estao sendo utilizados e desaloca esses objetos da memoria para liberar espaço, para nao ficar lento 
+*exception handler/ receber e controlar as exeçoes de erros que ocorre no nosso codigo 
+*resources manager / gerenciador de recursos 
+Estrutura de programa
+principais conceitos organizacionais em C# são
+
+
+programas
+namespaces
+tipos
+membros
+assemblies
+
+Programas c# consistem em um ou mais arquivos
+Os programas declarams tipos, que contem membros e cpodem ser organizados em namespaces
+classes e  interfaces sao exemplos de tipos
+campos, metodos, propriedades e eventos sao exemplos de membors
+quando os programas c# sao compilados , eles sao fisicamente empacotados em assemblies
+os assemblies geralmente tem a extensao de arquivo .exe ou dll., dependendo se sao aplicações ou bibliotecas
+Variaveis
+tipos de valor
+variaves de tipos de valor contem diretamente seus dados 
+As variáves têm sua própria cópia dos dados e não é possível que as operações afetem outra variavel(exceto no saco das variaveis de parametro ref e out)
+tipos de valor
+numericos:sbyte, short, int, long, byte, ushort, uint, ulong
+Caracteres Unicode: char
+Pontos flutuantes: float, double, decimal
+Booleano: bool
+enum, struct e tipos nullable (Exemplo int?)
+Tipos de referência
+Variáveis de tipos de referencia armazenam referencias e seus dados
+è possivel que duas variáveis façam referencia ao mesmo objeto e, portanto, que operações em uma variável afetem o objeto  e, portanto, que operações em uma variável afetem o objeto referenciado pela outra variavel
+tipos de classe: class, object, string
+tipos de arrays: int[], int[,], 
+interface, delegate tambem sao tipos de referencia no c#
+instruções 
+Ações de um programa são expressas usando instruções
+{
+em um bloco permite que várias instruções sejam escritas em contextos
+}delimitados por chaves {}
+Declaração de variáveis e constantes locais 
+if
+switch
+while
+do
+for
+foreach
+break
+continue
+return
+throw
+try .. catch .. finally
+using
+! diferente de  ex: if(args.Length !=2)
+array
+um array é uma estrutura de dados que contem um numero x de elementos, todos do mesmo tipo, que sao acessados atraves de indices computados
+arrays sao tipos de referencia e a declaração de uma variavel array simplesmente reserva espaço para uma referencia de uma instancia de array
+ao criar um array e especificado o tamanho da nova instancia, que é fixo durante todo o tempo de vida da instancia
+os indices dos elementos de um array variam de 0 a comprimento do array -1
+array unidimensional
+int[] a - new int [10];
+for (int i = 0; i < a.Length; i++)
+{
+  a[i] = i * i;
+}
+for (int i = 0; i< a.Length; i++)
+{
+  Console.WriteLine($"a[{i}] = {a[i]}");
+
+array multidimensional
+int[,] a2 = new int [10, 5];
+int [,,] a3 = new int [10, 5, 2];
+
+Inicializador de array
+int[] a = new int [] {1, 2, 3};
+int[] a= {1, 2, 3};
+
+Copiar um array
+int[] arrai-de-destino = new int[array-a-ser-copiado * 2 ]; 
+Array.Copy(arrai-a-ser-copiado, array-de-destido, array-a-ser-copiado.Length);
+
+Redimensionar um array
+int[] arrai-de-destino = new int[array-a-ser-copiado * 2 ]; //redimensionar o array para o dobro da capacidade
+Array.Resize(ref array-a-ser-redimensionado, array-a-ser-redimensionado.Length * 2);
+
+classes e objetos
+classes sao os tipos mais fundamentais de c#
+uma classe é uma estrutura de dados que combina estado (campos) e ações (metodos)
+objetos sao instancias de uma classe
+as classes suportam herança e polimorfismo, mecanismos pelos quais as classes derivadas podem estender e especializar as classes base
+
+public class Ponto
+{
+ public int x, y;
+ public Ponto(int x, int y)
+ {
+  this.x = x;
+  this.y = y;
+  }
+}
+Instancias de classes(onjetos) sao criadas usando o operador new, que aloca memoria para uma nova instancia, chama um construtor para incicializar a instancia e retorna uma referencia á instancia
+Ponto p1 = new Ponto (0, 0)
+Ponto p2 = new Ponto (10, 20);
+
+A memoria ocupada por um objeto é recuperada automaticamente quando o objeto nao esta mais acessivel. nao é necessario nem possivel desalocar explicitamente objetos em C#
+
+Membros 
+os membros de uma classe podem ser estaticos ou membros da instancia
+membros estaticos pertencem a classe e membros de instancia pertencem ao objeto
+constantes, variaveis, metodos, propriedades, construtores, etc..
+
+Assecibilidade
+cada membro de uma classe tem uma acesibilidade associada, que controla as regioes do texto do programa que podem acessar o membro
+podem ser:
+public, protected, internal, private
+
+Herança
+uma declaração de classe pode especificar uma classe base, herdando os membros public, internal e protected da classe base
+omitir uma especificação de classe base é o mesmo que derivar do tipo object
+
+Metodos
+um metodo é um membro que implementa uma computação ou ação que pode ser executada por um objeto ou classe
+os metodos podem ter uma lista de parametros, que representam valores ou referencias de  variaveis passados para o metodo e um tipo de retorno, que especifica o tipo do valor calculado e retornado pelo metodo
+
+structs 
+Como as classes, structs sao estruturas de dados que podem conter membros de dados e membors de ação, mas d diferentemente das classes, as structs sao tipos de valor e nao requerem alocação de heap
+uma variavel de um tipo de struct armazena diretamente os dados da estrutura, enquanto uma variavel de um tipo de classe armazena uma referencia a um objeto alocado na memoria
+structs nao aceitam herança determinada pelo desenvolvedor 
+sao uteis para pequenas estruturas de dados que possuem semantica de valor numeros complexos, pontos  em um sistema de coodrdenadas ou pares de chave-valor em um dicionario sao bons exemplos de utilização
+o suo de structs em vez de clsasses para pequenas estruturas de dados pode fazer uma grande diferença no numero de alocaç~es de memoria
+Construtores de structs sao chamados com o operador new, semelhante a um construtor de classe, mas em vez de alocar dinamicamente um objeto no heap gerenciado e retornar uma referencia a ele, um construtor struct simplesmente retorna o proprio valor struct( normalmente em um local temporario na stack) e esse valor é copiado conforme necessario
+
+iterfaces
+uma interface define um  contrato que pode ser implementado por classes e structs
+uma interface pode conter metodos, propriedades, eventos e indexadores
+uma interface nao fornece implementações dos membors que define - apenas suas assinaturas
+as interfaces podem empregar herança multipla
+
+enums
+um enum é um tipo de valor distinto com um conjunto de constantes nomeadas
+voce define enumerações quando precisa definir um tipo que pode ter um conjunto de valores discretos
+eles usam um dos tipos de valor integral como armazenamento subjacente. Eles fornecem significado semantico aos valores discretos
+Cada tipo de enum possui um tipo integral correspondente chamado tipo subjacente do tipo do enum
+um tipo de enumeração que nao declara explicitamente um tipo subjacente tem um tipo subjacente int
+
+
+programaçao orientada a objetos
+
+
+prop no visual code cria uma classe publica / atalho
+
+
+criar lista 
+List <string> listaString = new List<string>();
+listaString.Add("algo");
+listaString.Add("algo2");
+for (int contador = 0; contador <listaString.Count; contador++)
+{
+ Console.WriteLine($"Posição Nº {contador} - {listaString[contador]}");
+}
+
+usando o foreach
+int contadorForeach = 0;
+foreach(string item in listaString)
+{
+
+Console.WriteLine($"Posição Nº {contadorForeach} - {item}");
+contadorForeach++;
+}
+
+
+
+
+
+propriedades
+uma propriedade é um membro que oferece um mecanismo flexivel para ler, gravar ou calcular o vaolr de um campo particular
+prop /declara uma propriedade
+a diferença entre um campo e uma propriedade é o get, set
+é uma propriedade qnd tem/ public int exemplo {get, set}
+é um campo campo / private string _nome;
+quadradinho = metodo
+chavinha inglesa = propriedade
+
+
+.ToUpper()/colocar todas as letras maiusculas
+
+
+metodo
+um metodo é um bloco de codigo que contem uma serie de instruções
+
+nao faz parte do metodo
+ |                 metodo
+ |                 |
+public void AdicionarAluno(Pessoa aluno)
+         |                      |
+       tipo de retorno          |
+                               chamando os parametros(argumentos)
+
+metodos diferentes de void tem que ter um retorno/ return exemplo;
+
+
+construtores 
+Os construtores permitem que o programador defina valores padrão, limite a instanciação e grave codigos flexiveis e faceis de ler
+todo construtor vai ter o mesmo nome da classe
+
+public class pessoa
+{ 
+  public Pessoa()
+  {
+   
+  }
+
+Concatencação de strings
+Podemos formatar valores em diversas representações. Essa formatação de valores é conhecida por concatenação ou interpolação
+concatenação = " " + " " ;
+interpolação = $"{} {} {} ";
+
+Formatar Valore Monetarios
+exemplo:
+real
+ using ExemploExplorando.Models;
+ 
+ decimal valorMonetario = 82.40M;
+ 
+ Console.WriteLine($"{valorMonetario:C}");
+
+dolar
+using ExemploExplorando.Models;
+using System.Globalization;
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
+
+ decimal valorMonetario = 82.40M;
+ 
+ Console.WriteLine($"{valorMonetario:C}");
+
+ALTERAR CULTURA 
+using ExemploExplorando.Models;
+using System.Globalization;
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pt-BR");
+
+ decimal valorMonetario = 82.40M;
+ 
+ Console.WriteLine(valorMonetario.ToString("C" , CultureInfo.CreateSpecificCulture("en-US")));
+
+
+Formatalçao personalizada
+ Console.WriteLine(valorMonetario.ToString("C")
+ Console.WriteLine(valorMonetario.ToString("C1") 1 casa decimal
+ Console.WriteLine(valorMonetario.ToString("C3") 3 casas decimais 
+
+Porcentagem
+
+double porcentagem = .3421;
+Console.WriteLine(porcentagem.ToString("P"));
+
+Agrupar 
+
+int numero = 123456;
+Console.WriteLine(numero.ToString("##-##-##"));
+vai sair no console assim 12-34-56
+
+DateTime
+
+using System;
+
+DateTime data = DateTime.Now;
+Console.WriteLine(data); sai no console a data e a hora 
+Console.WriteLine(data.ToString("dd/MM/yyyy HH:mm")); personalizar o datetime
+
+formatar o DateTime
+Console.WriteLine(data.ToShortTimeString()); mostra somente as horas
+Console.WriteLine(data.ToShortDataString()); mostra somente a data
+
+Parse e Tryparse
+
+using System.Globalization;
+string dataString = "2022-13-07 18:00";
+
+DateTime.TryParseExact(dataString,
+                       "yyyy-MM-dd HH:mm",
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None, out DateTime data);
+Console.WriteLine(data);
+
+tryparse validado  ele valida e não encerra o programa com erro
+using System.Globalization;
+
+string dataString = "2022-12-07 18:00";
+
+bool sucesso = DateTime.TryParseExact(dataString,
+                       "yyyy-MM-dd HH:mm",
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None, out DateTime data);
+if (sucesso)
+{
+    Console.WriteLine($"Conversao com sucesso!! Data: {data}");
+}
+else
+{
+    Console.WriteLine($"{dataString} não é uma data valida");
+}
+
+
+exceptions
+or recursos de manipulação de exceção da linguagem C# ajudam voc~e a lidar com quaisquer situaçõse excepcionais ou inesperadas que ocorram quando um programa for executado
+uma exceção é quando um programa não tem mais saida, ele estava fazendo o que foi programado mas uma condição externa cortou o fluxo do programa. Uma condição externa que não tem como o programa prever. 
+
+finally
+vai executar o codigo independente se acontecer um erro ou não
+
+
+Coleções - 	Queue / fila
+quem chegou primeiro sai primeiro 
+quem ta por ultimo sai por ultimo
+FIFO first in first out
+
+Queue<int> fila = new Queue<int>();
+fila.Enqueue(2);
+fila.Enqueue(4);
+fila.Enqueue(6);
+fila.Enqueue(8);
+
+foreach(int item in fila)
+{
+   Console.WriteLine(item);
+}
+   Console.WriteLine($"Removendo o elemento: {fila.Dequeue()}");
+
+remover item da lista
+fila.Dequeue(); 
+não passa nenhum argumento pois o primeiro item a entrar na lista é o primeiro a sair 
+
+
+
+Coleções - Stack - pilha
+LIFO last in first out
+ultimo a entrar é o primeiro a sair 
+vai sempre tirando do topo
+
+Stack<int> fila = new Stack<int>();
+
+pilha.Push(4);
+pilha.Push(6);
+pilha.Push(8);
+pilha.Push(10);
+
+foreach(int item in pilha)
+{
+ Console.WriteLine(item);
+}
+Console.WriteLine($"Removendo o elemento do topo: {pilha.Pop()}");
+pilha.Push(20);
+
+foreach(int item in pilha)
+{
+ Console.WriteLine(item);
+}
+
+Remover objeto da pilha
+pilha.Pop(); nao declara argumento pois sempre vai remover o elemento do topo, ultimo elemento a entrar 
+
+Dictionary
+ Coleção de chave valor para armazenar valores únicos sem uma ordem especifica
+ ele serve para quando se tem uma chave composta e vc precisa que esses elementos sejam unicos, caso nao seja unicos ele vai adicionar uma exceção
+declarar um Dictionary
+Dictionary<string, string> estados = new Dictionary<string, string>();
+             |        |
+             |        elemento 2 valor que a chave representa
+             elemento 1 chave tem que ser unico se ele se repetir vai causar uma exceção
+a chave pode ser string, inteiro... nessa caso é string e o valor que ela vai armazenar tbm vai ser string
+
+Dictionary<string, string> estados = new Dictionary<string, string>();
+estados.Add("SP", "São Paulo");
+estados.Add("BA", "Bahia");
+estados.Add("MG", "Minas Gerais");
+
+foreach(var item in estados)
+{
+ Console.WriteLine($"Chave: {item.key}, valor: {item.Value}");
+}
+
+Remover elemento do Dictionary
+estados.Remove("BA"); vai remover o elemento selecionado
+
+Dictionary<string, string> estados = new Dictionary<string, string>();
+estados.Add("SP", "São Paulo");
+estados.Add("BA", "Bahia");
+estados.Add("MG", "Minas Gerais");
+
+foreach(var item in estados)
+{
+ Console.WriteLine($"Chave: {item.key}, valor: {item.Value}");
+}
+ Console.WriteLine("-------------------");
+estados.Remove("BA");
+foreach(var item in estados)
+{
+ Console.WriteLine($"Chave: {item.key}, valor: {item.Value}");
+}
+
+
+Alterar os valores das chaves
+Não da para alterar as chaves, somente os valores
+estados["SP"] = "São Paulo - valor alterado";
+
+Verificando elemento do Dictionary
+
+if(estados.ContainsKey(chave))
+{
+ Console.WriteLine($"Valor existente: {chave}");
+}
+else
+{
+ Console.WriteLine($"Valor não existente. É seguro adicionar a chave: {chave}");
+}
+
+Obter um valor de um elemento no Dictionary
+Console.WriteLine(estados["MG"]);
