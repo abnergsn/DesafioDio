@@ -429,3 +429,84 @@ else
 
 Obter um valor de um elemento no Dictionary
 Console.WriteLine(estados["MG"]);
+
+
+Tuplas
+Tuplas fornece sintaxe concisa para agrupar varios elementos de dados em uma estrutura de dados leve
+tuplas sao uma alternativa à criação de classes
+
+declarando uma tupla
+(int Id, string Nome, string Sobrenome, decimal Altura) tupla = (1, "Nome", "sobrenome", 1.80M);
+Console.WriteLine($" Id: {tupla.Id});
+Console.WriteLine($" Nome: {tupla.Nome});
+Console.WriteLine($" Sobrenome: {tupla.Sobrenome});
+Console.WriteLine($" Altura: {tupla.Altura});
+
+outra sintaxe da tupla
+
+ValueTuple<int, string, string, decimal> outroExemploTupla = (1, "Nome", "sobrenome", 1.80M);
+
+Console.WriteLine($" Id: {tupla.Item1});
+Console.WriteLine($" Nome: {tupla.Item2});
+Console.WriteLine($" Sobrenome: {tupla.Item3});
+Console.WriteLine($" Altura: {tupla.Item4});
+
+mais um exemplo de sintaxe da tupla
+
+var outroExemploTuplaCreate = Tuple.Create(1, "Nome", "sobrenome", 1.80M);
+
+
+Console.WriteLine($" Id: {tupla.Item1});
+Console.WriteLine($" Nome: {tupla.Item2});
+Console.WriteLine($" Sobrenome: {tupla.Item3});
+Console.WriteLine($" Altura: {tupla.Item4});
+
+
+Tuplas em métodos
+
+public class LeituraArquivos
+{
+ public (bool Sucesso, string[] Linhas, int QuantidadeLinhas) LerArquivos(string caminho)
+ {
+   try
+     {
+       
+        string[] linhas = File.ReadAllLines(caminho);
+        return (true, linhas, linhas.Count());
+     }
+     catch (Exception)
+     {
+        return(false, new string[0], 0);
+      }
+    }
+}
+
+DESCARTE
+colocar underline( _ ) para descartar as informações não utilizadas
+
+
+Descontrutor
+ele separa as informações para o retorno
+ele desconstroi para variaveis separadas
+
+IF Ternário
+mais legivel, menos linhas 
+
+int numero = 10;
+bool ehPar = false;
+ehPar = numero % 2 == 0;
+Console.WriteLine($"O número {numero} é " + (ehPar ? "par" : "ímpar"));
+
+IF não Ternário
+ int numero = 20;
+        if (numero % 2 == 0)
+        {
+            Console.WriteLine($"O número: {numero} é par");
+        }
+        else
+        {
+            Console.WriteLine($"O numero {numero} é impar");
+        }
+
+
+a
