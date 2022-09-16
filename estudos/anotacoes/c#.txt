@@ -509,4 +509,149 @@ IF não Ternário
         }
 
 
-a
+
+Gerenciador de pacotes
+o que é um pacote?
+um pacote é um conjunto de codigos uteis, que possibilita o compartilhamento e reuso do codigo
+Nuget é um gerenciado de pacotes, que permite desenvolvedores compartilharem codigos e bibliotecas
+
+Serialização de dados
+O processo de serializar consiste em transfomar objetos em um fluxo de bytes para seu armazenamento ou transimessão
+
+JSON
+javascript notation object é um formato de texto que segue a sintaxe do Javascript, muito usado para transimitir dados entre aplicações
+caracteristicas que representa um JSON,ele padroniza a escrita de um objeto em um formato de texto chamado de JSON
+formato texto que representa um objeto, para comunicar com outras aplicações
+por exemplo mandar dados do dotnet para o java, ou qualquer outra linguagem
+intermediario para serializar os dados para ter comunicação entre diferentes sistemas
+usado para integração  e comunicação
+muito utilizado e padronizado para fazer troca de informações
+é um formato independente de linguagem e vc pode utilizar tanto para fazer integrações tanto dentro do proprio sistema
+
+Converter para o formato Json
+colocar no using o pacote instalado do Json
+
+using Newtonsoft.Json;
+
+Venda v1 = new Venda(1, "Material de escritorio", 25.00M);
+
+string serializado = JsonConvert.SerializeObject(v1, Formatting.Indented);
+
+Console.WriteLine(serializado);
+
+vai sair no console:
+{
+ "Id": 1,
+ "Produto": "Material de escritorio",
+ "Preco": 25.00
+}
+ele tem um abre e fecha chaves, todo nome de propriedade vai começar com aspas duplas e terminar com aspas duplas, numero inteiro representa normal e strings sao representadas com aspas duplas tbm
+ele deixa de ser um objeto e vira uma string, para qualquer linguagem fazer a leitura desse objeto pois ele esta serializado no formato Json
+
+compartilhar o dado com o cliente de outro sistema
+File.WriteAllText("Arquivos/vendas.json", serializado); ele vai salvar o texto que foi serializado em um arquivo .json
+
+colchetes no arquivo Json significa que tem uma coleção
+abre e fecha chaves significa inicio e fim de um objeto
+quando fecha a chave percebe-se que tem uma virgula, essa virgula indica que tem mais um objeto
+
+ISO 8601 = padronização de datas 
+
+Atributos
+adiciona uma metadata a uma propriedade, e essa propriedade vai usar esse atributo como instrução.
+suponhamos que um cliente enviou um arquivo Json e o nome da propriedade foge das convenções do c#, ai é preciso usar um atributo 
+ex:
+     public int Id {get; set}
+     
+     [JsonProperty("Nome_Produto")]  isso diz ao seu programa q o nome que esta vindo é Nome_Produto e atribuindo ela a Produto
+     public string Produto {get; set;}
+
+
+
+Tipos de valor nulo (nullable)
+Um tipo de valor nulo permite representar o tipo da variavel e adicionalmente, o valor nulo
+bool = true, false
+bool? = true, false, null
+
+
+bool? desejaReceberEmail = null;
+if(desejaReceberEmail.HasValue && desejaReceberEmail.Value)
+{
+ Console.WriteLine("O usuario optou por receber e-mail.");
+}
+ else 
+{
+  Console.WriteLine("O usuario não respondeu ou optou por não receber e-mail");
+}
+
+
+tipos Anonimos 
+os tipos anonimos fornecem um modo conveniente de encapsular propriedades somente leitura
+uma variavel que representa alguns valores seja em propriedades somente leitura
+
+var tipoAnonimo = new {Nome = "Leonardo", Sobrenome = "Buta", Altura = 1.80 };
+Console.WriteLine("Nome: " + tipoAnonimo.Nome);
+
+
+tipo Anonimo em coleção
+
+string conteudoArquivo = File.ReadAllText("Arquivos/vendas.json");
+
+List<Venda> listaVenda = JsonConvert.DeserializeObject<List<Venda>>(conteudoArquivo);
+
+var listaAnonimo = listaVenda.Select(x => new {x.Produto, x.Preco });
+
+foreach(var venda in listaAnonimo)
+{
+ Console.WriteLine($"Produto: {venda.Produto}, Preço: {venda.Preco}");
+}
+
+
+Variavel dinamica
+dynamic 
+ela pode assumir diversos tipos 
+
+
+Classes genéricas
+As classes genéricas encapsulam operações que não são especificas de um determinado tipo de dados
+List<tipo> lista = new List<tipo>();
+
+ex: namespace Models
+    {
+      public class MeuArray<T>
+      {
+        private T[] array = new T[10];
+      }
+     }
+o "T" significa type(tipo), ele vai ser substituido conforme o valor passado
+
+namespace Models
+    {
+      public class MeuArray<T>
+      {
+        private static int capacidade = 10;
+        private int contador = 0;
+        privat T[] array = new T[capacidade];
+        
+        public void AdicionarElementoArray(T elemento)
+        {
+         if (contador +1 < 11 )
+          {
+            array[contador] = elemento;
+          }
+          contador++;
+      }
+        public T this [int index]
+        {
+           get {retur array[index];}
+           set { array[index] = value; }
+         }
+     }
+
+
+
+
+Métodos de extensão
+os metodos de extenssao permitem que voce adicione tipos existentes esm criar um novo tipo derivado, recompiçlar ou, caso contrario modifficar o tipo original
+
+
