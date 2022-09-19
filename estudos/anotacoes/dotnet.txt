@@ -1,0 +1,20 @@
+dotnet
+CLI
+linhas de comando
+dotnet --help /exibe uma lista de comandos e informaçoes
+dotnet --version /versao do dotnet
+dotnet --info/todas versoes instaladas do dotnet
+nuget /gerenciador de pacotes para o dotnet
+dotnet new --help * dotnet new -h / abreviação 
+dotnet restore /restaura os pacotes para conectar em algum banco de dados atrelado ao projeto
+dotnet build/ restaura os pacotes e pega o codigo fonte e vai fazer o processo de compilação e vai gerar os binarios dll/ prepara o codigo, verifica se tem erro 
+dotnet run /roda o codigo 
+
+criar um projeto pelo cmd 
+
+dotnet new sln --name exemplo / criar uma solution
+dotnet new console
+dotnet sln add exemplo/exemplo.csproj
+code . 
+ativar omnisharp / visual code / apertar f1 / digitar omnisharp e escolher o projeto sln
+

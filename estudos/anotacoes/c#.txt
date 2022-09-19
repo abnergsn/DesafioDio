@@ -111,7 +111,7 @@ public class Ponto
   this.y = y;
   }
 }
-Instancias de classes(onjetos) sao criadas usando o operador new, que aloca memoria para uma nova instancia, chama um construtor para incicializar a instancia e retorna uma referencia á instancia
+Instancias de classes(objetos) sao criadas usando o operador new, que aloca memoria para uma nova instancia, chama um construtor para incicializar a instancia e retorna uma referencia á instancia
 Ponto p1 = new Ponto (0, 0)
 Ponto p2 = new Ponto (10, 20);
 
@@ -256,7 +256,7 @@ CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pt-BR");
  Console.WriteLine(valorMonetario.ToString("C" , CultureInfo.CreateSpecificCulture("en-US")));
 
 
-Formatalçao personalizada
+Formataçao personalizada
  Console.WriteLine(valorMonetario.ToString("C")
  Console.WriteLine(valorMonetario.ToString("C1") 1 casa decimal
  Console.WriteLine(valorMonetario.ToString("C3") 3 casas decimais 
@@ -653,5 +653,85 @@ namespace Models
 
 Métodos de extensão
 os metodos de extenssao permitem que voce adicione tipos existentes esm criar um novo tipo derivado, recompiçlar ou, caso contrario modifficar o tipo original
+
+
+Alocação de memória 
+vamos entender os dois tipos de memória existentes no C#, tipos de valores e tipos de referência
+
+
+declaração de variável
+void Metodo() {
+int a = 5 ;
+int b = 10;
+Pessoa p1 = new Pessoa();
+}
+
+
+int a = 5 ;
+ |  |   |valor que ela recebe
+ |  |nome
+ |tipo
+esse tipo de variavel vai para o stack
+
+Pessoa p1 = new Pessoa() esse tipo de metodo vai para o Stack e para o heap
+
+
+|p1 (ref)|--------------> |p1 objeto 
+|b = 10  |                |
+|a = 5   |                |
+| STACK  |                |   HEAP
+
+
+no stack(pilha) fica armazenado o nome e o valor da variavel
+
+o metodo armazena uma referencia no stack para o heap
+ele pode armazenar alem de valores inteiros ele pode armazenar qualquer coisa, mais complexo
+esse tipo mais complexo fica na memoria heap, onde fica a verdadeira representação e onde o objeto fica
+por ser mais complexo ele armazena na memoria heap
+ele cria na memoria stack e armazena o valor e referencia para o objeto que esta representado na memoria heap
+classes, interfaces, metodos armazenado na heap
+mais simples como valores int, decimal, bool e armazenado na stack
+
+
+Limpeza de memoria
+O Garbage Collector (GC)
+ele limpa todos os dados da memoria heap que estao sem referencia para uma variavel em uso
+fica em constante execução
+os da stack vai limpando LIFO 
+
+
+
+Tipos de valor e referência
+Tipos de valor: Uma variavel de um tipo de valor contem uma instancia do tipo
+tipos de referência: Uma variável de um tipo de referência contém uma referência a uma instância do tipo
+
+
+
+
+Tipos de referência ->|p1 (ref)|--------------> |p1 objeto 
+tipos de valor ------>|b = 10  |                |
+tipos de valor ------>|a = 5   |                |
+                      | STACK  |                |   HEAP
+
+
+tipos de valor = armazena os valores nele mesmo, sao conhecidos por serem mais simples tipos primitivos
+tipos de referência = armazena apenas o nome da variavel e uma referencia para a memoria heap
+
+
+tipo valor
+
+ void metodo(){       |        |                | 
+ int a = 5;           |b = 5   |                |
+ int b = a;           |a = 5   |                |
+ }                    | STACK  |                |   HEAP
+
+
+tipo referência
+
+void Metodo() {                                   |        |     |        |
+Pessoa p1 = new Pessoa("Bnero" , "Nero");         |        |     |        |
+Pessoa p2 = p1;                                   |p2(ref) |---->|Pessoa  |
+p2.Nome = "Eduardo";                              |p1(ref) |---->|(objeto)|
+}                                                    Stack       Heap
 
 
