@@ -1,4 +1,4 @@
-c#
+ c#
 é uma linguagem orientada a objeto e fortemente tipada
 a sintaxe do c# é similar a do c,c++ ou java
 suporta os conceitos de encapsulamento, herança e polimorfismo(OO)
@@ -30,22 +30,26 @@ classes e  interfaces sao exemplos de tipos
 campos, metodos, propriedades e eventos sao exemplos de membors
 quando os programas c# sao compilados , eles sao fisicamente empacotados em assemblies
 os assemblies geralmente tem a extensao de arquivo .exe ou dll., dependendo se sao aplicações ou bibliotecas
+
 Variaveis
 tipos de valor
 variaves de tipos de valor contem diretamente seus dados 
 As variáves têm sua própria cópia dos dados e não é possível que as operações afetem outra variavel(exceto no saco das variaveis de parametro ref e out)
+
 tipos de valor
 numericos:sbyte, short, int, long, byte, ushort, uint, ulong
 Caracteres Unicode: char
 Pontos flutuantes: float, double, decimal
 Booleano: bool
 enum, struct e tipos nullable (Exemplo int?)
+
 Tipos de referência
 Variáveis de tipos de referencia armazenam referencias e seus dados
 è possivel que duas variáveis façam referencia ao mesmo objeto e, portanto, que operações em uma variável afetem o objeto  e, portanto, que operações em uma variável afetem o objeto referenciado pela outra variavel
 tipos de classe: class, object, string
 tipos de arrays: int[], int[,], 
 interface, delegate tambem sao tipos de referencia no c#
+
 instruções 
 Ações de um programa são expressas usando instruções
 {
@@ -65,6 +69,7 @@ throw
 try .. catch .. finally
 using
 ! diferente de  ex: if(args.Length !=2)
+
 array
 um array é uma estrutura de dados que contem um numero x de elementos, todos do mesmo tipo, que sao acessados atraves de indices computados
 arrays sao tipos de referencia e a declaração de uma variavel array simplesmente reserva espaço para uma referencia de uma instancia de array
@@ -734,4 +739,324 @@ Pessoa p2 = p1;                                   |p2(ref) |---->|Pessoa  |
 p2.Nome = "Eduardo";                              |p1(ref) |---->|(objeto)|
 }                                                    Stack       Heap
 
+
+
+
+POO
+A POO é um paradigma de programação, ou seja, corresponde a uma técnica de programação para um fim especifico
+paradigma é um conjunto de regras, uma maneira de fazer as coisas
+4 pilares da POO
+*abstração
+*encapsulamento
+*herança
+*polimorfismo
+
+O principal conceito da POO são classes e objeto!
+a classe é a representação de um objeto
+objeto é a classe concretizada
+classe e objeto estão muito ligados mas sao coisas diferentes, classe e um representação de algo do mundo real onde coloca-se suas caracteristicas, e  o objeto é uma implementação da classe
+
+
+paradigmas de programação
+um paradigma nada mais é do que um modelo de tecnicas, estruturas e formas de solucionar um problema
+paradigma de programação é diferente de linguagem de programação
+uma linguagem de programação implementa um ou mais paradigmas
+
+
+Paradigmas de progamação
+exemplos
+*programação orientada a objetos
+*programação estruturada
+*programação imperativa
+*programação procedural
+*programação orientada a eventos
+*programação logica
+
+
+
+Abstração 
+abstrair um objeto do mundo real para um contexto especifico, considerando apenas os atributos importantes
+ex: pessoa 
+|+nome: string|
+|+idade: int  |
+|+apresentar()|->metodo
+   classe
+
+Encapsulamento
+O encapsulamento serve para proteger uma classe e definir limites para alterações de suas propriedades
+Serve para ocultar seu comportamento e explor somente o necessário
+
+
+Herança
+a herança nos permite reutilizar atributos, métodos e comportamentos de uma classe em outras classes
+serve para agrupar objetos que são do mesmo tipo, porém com caracteristicas diferentes
+ 
+ex:
+namespace ExemploPOO.Models
+{
+ public class Aluno : Pessoa
+ {
+ }
+}
+
+a classe Aluno está herdando de Pessoa 
+
+Polimorfismo
+O polimorfismo vem do grego e significa "muitas formas"
+com o polimorfismo, podemos sobrescrever métodos das classes
+filhas para que se comportem de maneira diferente e ter sua própria implementação
+
+Polimorfismo tem o objetivo de sobrescrever os metodos da sua classe derivada, permitindo implementarmos classes especializadas
+
+Polimorfismo em tempo de execução (override/ Late binding)
+esse sim depende de herança
+
+na frente do "public" coloca a palavra "virtual" que significa que o metodo pode ser sobreescrito se a classe filha desejar
+
+ex: na classe mãe no metodo que deseja alterar
+   
+public class Pessoa
+{
+  public string Nome {get; set; }
+  public int Idade {get; set; }
+  public string Email {get; set; }
+  
+  public virtual void Apresentar() - o metodo a ser sobreescrito
+ {
+  Console.WriteLine($"Ola, meu nome é {Nome} e tenho {Idade} anos!");
+  }
+}
+
+na classe filha:
+
+public class Aluno : Pessoa
+{
+ public double Nota {get; set;}
+ 
+ public override void Apresentar() - coloca "override" para sobrescrever o método
+ {
+  Console.WriteLine("ola, meu nome é {Nome}");
+ }
+}
+
+
+Polimorfismo em tempo de compilação Overload/early binding
+
+tem 2 tipos de polimorfismo, um que depende de herança e um que não depende
+
+mais simples, conhecido como tempo de compilação(Overload/early binding) 
+metodos com nomes iguais e tipos de retornos iguais porem com o numero de parametros diferentes
+
+ex:
+ public class Calculadora
+ {
+    public int Somar(int num1, int num2)
+   {
+     return num1 + num2;
+    }
+  
+  public int Somar(int num1, int num2, int num3)
+  {
+    return num1 + num2 + num3;
+  }
+ }
+
+
+Classe abstrata 
+uma classe abstrata tem como objetivo ser exclusivamente um modelo para ser herdado, portanto não pode ser instanciada
+Você pode implementar métodos ou deixa-los a cargo de quem herdar.
+não pode ser istanciada, tem que ser herdada
+ex: public abtratic class Conta
+    {  
+       protected decimal saldo;
+      
+       public abstract void Creditar(decimal valor);
+      
+       public void ExibirSaldo()
+       {
+         Console.WriteLine("O seu saldo é: " + saldo);
+       }
+    }
+o metodo abstrato nao tem corpo {} ele não tem uma implementação, quem herdar da classe conta, vai ter que obrigatioriamente implementar o metodo Creditar
+protected significa que é protegido por alterações externas com exceção das suas classes filhas
+private somente a classe conta consegue acessar 
+protected a classe conta e filhos da classe conta consegue acessar
+para implementar o metodo abstrato na classe filha usa o override
+ex: public class Corrente : Conta
+    {
+      public override void Creditar(decimal valor)
+      {
+           saldo += valor;
+       }
+     }
+
+
+
+ctor = atalho para construtor 
+ex: public Program (Parameters)
+    {
+     }
+
+Construtor por Herança
+
+Vamos supor que eu quero que ao instanciar a classe Pessoa seja obrigatorio passar o nome
+como fazer isso?
+Criar um contrutor que recebe uma string nome e falar que Nome é igual a nome
+Problema parcialmente resolvido, de uma certa forma foi criado um construtor que exige o nome e ele esta passando para a propriedade nome
+ou seja sempre que alguem instanciar a classe Pessoa tem que instanciar atraves desse construtor que exige o nome 
+fazendo isso foi quebrada duas classes, Aluno e Professor
+O aluno estava trabalhando com a classe Pessoa em um momento em que o nome não era obrigatorio, a partir do momento em que essa Pessoa passou a exigir o nome como obrigatorio pelo seu construtor o Aluno não sabe o que fazer, logo a classe foi quebrada
+ 
+a minha classe Pessoa tem um unico construtor que exige nome, é obrigatorio passar o nome para fazer uma instancia de pessoa
+porem minha classe aluno e professor nao estavam prevendo essas mudanças, ou seja eles nao sabem como se comportarem, tive que fazer uma atualização nelas para que elas nao quebrassem
+como minha Pessoa o nome é obrigatorio, ele tem que criar um construtora tambem para a classe Aluno e Professor, se Pessoa exige nome e Aluno é filho de Pessoa o Aluno tambem vai exigir o nome, logo quando instancio a classe aluno, estou exigindo o nome tambem, so que não estou utilizando o nome aqui, estou simplesmente colocando : e a palavra base e entre parenteses o nome
+significa que esta recebendo o nome e esta passando para a classe pai o nome
+
+    
+namespace POO.Models
+{
+    public class Pessoa
+    {
+
+        public Pessoa(string nome) -  esse construtor exige um nome para instanciar a classe
+        {
+            Nome = nome;
+        }
+        public string Nome { get; set; }    
+        public int Idade { get; set; } 
+
+        public virtual void apresentar()
+        {
+            Console.WriteLine($"O nome é: {Nome} e a idade é: {Idade}");
+        }
+    }
+
+}
+
+
+
+       public class Aluno : Pessoa
+    {
+        public Aluno(string nome) : base(nome) - Resolvendo a quebra, como a classe Aluno é filha de Pessoa ela tambem exige o nome tambem so que nao estou utilizando o nome aqui, estou coloando : e a palavra base e entre parenteses o nome, significa que esta recebendo o nome e esta passando para a classe pai 
+        {
+   
+        }
+
+        public int Nota { get; set; }
+
+        public override void apresentar()
+        {
+            Console.WriteLine($"Olá meu nome é {Nome} e minha nota é {Nota}");
+        }
+    }
+}
+
+
+
+ao colocar um construtor vazio, da a opçao de nao colocar nada no nome ou de colocar
+ao fazer isso na classe pai tambem tem que fazer nas classes filhas
+exemplo:
+ 
+namespace POO.Models
+{
+    public class Pessoa
+    {
+        public Pessoa()   - agora ele pode nao passar nada 
+        {
+
+        }
+        public Pessoa(string nome) -  ou pode passar o nome 
+        {
+            Nome = nome;
+        }
+        public string Nome { get; set; }    
+        public int Idade { get; set; } 
+
+        public virtual void apresentar()
+        {
+            Console.WriteLine($"O nome é: {Nome} e a idade é: {Idade}");
+        }
+    }
+
+}
+
+
+
+
+
+
+
+Classe selada
+Uma classe selada tem como objetivo  impedir que outras classes façam uma herança dela, ou seja, nenhuma classe pode ser sua derivada
+tambem existem metodos e propriedades seladas
+<<sealed>>
+classe selada não podem ter classes filhas
+e metodos selados não podem ser sobreescritos por suas classes filhas
+
+ex: public sealed class Professor : Pessoa - classe selada
+    {
+     public decimal Salario {get; set; }
+     public sealed override void Apresentar() - metodo selado
+     {
+     }
+    }
+
+Classe objetc
+A classe System.Object é a mae de todas as classes na hierarquia do .NET
+Todas as classes derivam, direta ou indiretamente da classe
+Object, e ela tem como objetivo prover serviços de baixo nivel para suas classes filhas
+
+
+
+Interfaces
+Uma interface é um contrato que pode ser implementado por uma classe
+é como se fosse uma classe abstrata, podendo definir métodos abstratos para serem implementados
+assim como uma classe abstrata, uma interface não pode ser instanciada
+
+no c# não tem o conceito de herança multipla, uma classe não pode herdar de duas classes ao mesmo tempo
+uma classe pode implementar varias interfaces
+
+ex: public interface ICalculadora
+    {
+       int Somar(int num1, int num2);
+       int Subtrair(int num1, int num2);
+       int Multiplicar(int num1, int num2);
+       int Dividir(int num1, int num2);
+     }
+
+ implementando a interface 
+ da mesma maneira que faz com a herança e inforamar o import dela(o lugar que ela esta)
+ 
+ex: implementar a interface ICalculadora na classe Calculadora
+    using POO.Interfaces;
+    namespace POO.Models
+    {
+       public class Calculadora : ICalculadora
+       {
+         public int Somar (int num1, int num2) 
+         { 
+           return num1 + num2;
+         }
+         public int Subtrair (int num1, int num2) 
+         { 
+           return num1 - num2;
+         }
+         public int Multiplicar (int num1, int num2) 
+         { 
+           return num1 * num2;
+         }
+         public int Dividir (int num1, int num2) 
+         { 
+           return num1 / num2;
+         }
+     }
+
+
+
+Program
+  using POO.Models;
+  using POO.Interfaces;
+
+  ICalculadora calc = new Calculadora();
+  estou utilizando a interface e passando a classe que implementa essa interface
 
