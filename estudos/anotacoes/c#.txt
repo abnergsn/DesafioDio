@@ -1060,3 +1060,18 @@ Program
   ICalculadora calc = new Calculadora();
   estou utilizando a interface e passando a classe que implementa essa interface
 
+
+Colocar um metodo padrao na interface
+ex: public interface ICalculadora
+    {
+       int Somar(int num1, int num2);
+       int Subtrair(int num1, int num2);
+       int Multiplicar(int num1, int num2); - metodos que nao tem corpo são obrigatorios a implementação na classe
+       int Dividir(int num1, int num2);
+       {
+        return num1 / num2; - metodos que tem corpo se torna opcional para sua implementação
+       }
+     }
+
+
+
