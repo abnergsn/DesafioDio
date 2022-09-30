@@ -1,0 +1,481 @@
+Banco de dados
+
+um banco de dados é uma coleção organizada de informações 
+estruturadas, normalmente armazenadas eletronicamente em um sistema de computador
+
+Tipos de banco de dados
+
+Banco de dados relacional: O tipo mais usado atualmente
+armazenando dados estruturados, sendo organizado em tabelas,
+com colunas e linhas, que se relacionam entre si
+exemplos: Microsoft SQL Server, Oracle database, MySQL
+
+Tabela
+São dados estruturados e organizados logicamente em formato de linha e coluna
+
+Banco de dados não relacional
+Banco de dados onde os dados não são armazenados em tabela, 
+são armazenados de maneira não estruturadas ou semi-estruturadas
+ex: mongoDB
+existem varios tipos: document databases, key-value, databases
+wide-column stores e graph databases
+
+DBMS
+Database Management System é um software utilizado para
+acessar, manupular e monitorar um sistema de banco de dados
+
+
+A linguagem SQL
+SQL(Structured Query Language): É a linguagem de banco de dados usada para consulta e manupulação de dados
+
+Comandos da linguagem SQL
+ DLL                                              DCL                                                                       DML                              TCL                                                                                                   DQL
+Create - criar uma tabela                        Grant  - garantir um acesso a uma tabela para um determinado usuario      Insert - inserir um dado         Commit     - salvar os dados                                                                         Select - selecionar dados 
+Drop - apagar uma tabela                         Revoke - revogar o acesso de uma tabala para um usuario                   Update - atualizar um dado       Rollback   - salvar os dados     
+Alter - alterar uma tabela                                                                                                 Delete - deletar um dado         Save Point - para salvar operações mais complexas/continuar de onde estava e fazer outra tentativa
+Truncate - apagar todos os dados de uma tabela  
+
+
+DLL - Data Definition Language
+DCL - Data Control Language
+DML - Data Manipulation Language
+TCL - Transaction Control Language
+DQL - Data Query Language
+
+
+Database
+é uma coleção de dados estruturados, agrupados de forma concisa.
+é composto de tabelas, procedures, views, etc.
+
+SELECT * FROM clientes - selecionar todos os dados da tabela clientes
+o * signfica todas as colunas da tabela
+para selecionar uma coluna ou colunas, colocar o nome da coluna e ","
+ex: SELECT Nome, Sobrenome, Email FROM Clientes
+
+ORDER BY Nome - vai ordenar a tabela de clientes por nome pela ordem alfabetica
+ORDER BY Nome DESC - ordenar por nome em ordem decrescente
+ORDER BY Nome ASC - ordena em ordem crescente(desnecessario, pois quando manda ordenar ele ja faz automaticamente pela ordem crescente)
+ORDER BY Nome, Sobrenome - ordena alfabeticamente a coluna nome e sobrenome
+
+
+Selecionar todos os objetos na tabela
+SELECT * FROM Clientes 
+  |    |  |    |
+  |    |  |   tabela
+  |    |  de
+  |   todos
+Selecionar 
+
+selecionar um objeto especifico na tabela
+SELECT * FROM Clientes - selecionar somente pelo nome
+WHERE Nome = 'Rob'
+
+SELECT * FROM Clientes
+WHERE Nome = 'Rob' AND Sobrenome 'Walters'   - selecionar pelo nome e sobrenome
+ |       |     |    |     |
+ |       |     |    |   coluna
+ |       |     |    e  
+ |       |   objeto
+ |       |
+ |     coluna
+onde    
+
+WHERE Nome = 'Rob' OR Sobrenome 'Walters' - para selecionar o q tiver, se tiver o rob vai aparecer se tiver o waters vai aparecer 
+|       |     |    |     |         |
+|       |     |    |   coluna     objeto
+|       |     |    ou  
+|       |   objeto
+|       |
+|     coluna
+onde    
+
+
+Selecionar por letra 
+SELECT * FROM Clientes
+WHERE Nome LIKE 'G%'
+|       |    |    | 
+|       |    |    | 
+|       |    |    % vai buscar todos que começam com essa letra e o que tiver a diante não interfere 
+|       |   com
+|       |
+|     coluna
+onde    
+
+
+SELECT * FROM Clientes
+WHERE Nome LIKE '%G%'
+|       |    |    | 
+|       |    |    | 
+|       |    |    %% vai buscar todos que tem a letra G no nome. Antes do asterisco pode ter qualquer coisa e depois do asterisco pode ter qualquer coisa
+|       |   com
+|       |
+|     coluna
+onde    
+
+
+
+Realizando um INSERT - inserir dados na coluna
+INSERT INTO Clientes (Nome, Sobrenome, Email, AceitaComunicados, DataCadastro)
+VALUES ('Bnero', 'Nero', 'email@email.com', 1, GETDATE())
+
+
+INSERT INTO Clientes (Nome, Sobrenome, Email, AceitaComunicados, DataCadastro)
+      |       |                       |
+      |       |                    Colunas
+      |     Tabela
+  inserir em
+
+VALUES ('Bnero', 'Nero', 'email@email.com', 1, GETDATE())
+  |      os valores devem ser separados por virgula. O GETDATE()Pega o horario atual 
+Valores
+
+
+SELECT * FROM Clientes WHERE Nome = 'Bnero' - selecionar o item na tabela
+para rodar somente uma parte do codigo, selecionar a parte do codigo e f5
+
+INSERT INTO Clientes VALUES ('Bnero', 'Nero', 'email@email.com', 1, GETDATE())
+Pode-se omitir as colunas para ter um codigo mais enxuto, deve-se obedecer a ordem das colunas
+
+Update
+atualizar um valor na tabela
+
+SELECT * FROM Clientes WHERE Nome = 'katiau'
+
+UPDATE Clientes
+SET Sobrenome = 'fiuuu'
+WHERE Id = 9 - LEMBRAR DE SEMPRE COLOCAR O ID se n altera o valor da coluna inteira
+
+para atualizar mais campos, colocar uma virgula ","
+ex:
+
+SELECT * FROM Clientes WHERE Nome = 'katiau'
+UPDATE Clientes
+SET Sobrenome = 'fiuuu',
+  AceitaComunicados = 0,
+  DataCadastro = GETDATE()
+WHERE Id = 9
+
+DESFAZENDO CAGADAS
+BEGIN TRAN - modo em que pode desfazer alterações
+ROLLBACK - desfaz alterações
+
+Deletando 
+DELETE Clientes
+WHERE Id = 9    LEMBRAR DE COLOCAR O WHERE  se n apaga a tabela toda
+
+
+Tipos de dados
+mais usados char(n) e varchar(n)
+String 
+char(n)        8,000 characters
+varchar(n)     8,000 characters
+varchar(max)   1,073,741,824 characters
+text           2GB tex data
+nchar          4,000 characters 
+nvarchar       4,000 characters
+binary         8,000 characters
+
+
+char(n) tem valor fixo, ex char(3) so vai aceitar 3 caracteres, ex sigla de estado
+varchar(n) tem valor variavel, quando nao tem certeza quantos caracteres vai usar
+ex: nome de pessoa
+
+Numeric Data Tipes
+bit           integrer can be 0, 1 or NULL
+tinyint       allows whole numbers from 0 to 255
+smallint      allows whole numbers between -32,768 and 32,767
+int           allows whole numbers between -2,147,483,648 and 2,147,483,647
+bigint        allows whole numbers between -9,223,372,036,854,775,808 and 9,223,372,036,854,775,807
+decimal(p,s)  fixed precision and scale numbers, allows numbers from -10^38+1 to 10^38-1
+ o parametro p indica o maximo total de digitos numericos que pode ser armazenado
+(dois a esquerda e dois a direita do ponto decimal) p tem que valer de 1 a 38, default is 18
+o parametro s indica o maximo de digitos numerocos que pode ser armazenados a direita do ponto decimal
+s tem que valer 0 do p. Defalt value is 0.
+p = numero
+s = casa decimal
+
+maioria dos casos vai usar o bit, int, bigint, decimal(p,s)
+
+smallmoney     representa valores monetarios -214,748.3648 ate 214,748.3647
+money          representa valores de -922,337,203,685,477.5808 ate 922,337,203,685,477.5807
+melhor usar o decimal para valores de dinheiro por ser mais preciso
+
+Date and Time Data Types
+datetime       de janeiro 1, 1753 ate dezembro 31, 9999 with an accuracy of 3.33 ms
+datetime2      de janeiro 1,00001 ate dezembro 31,9999 with an accuracy of 100 nanoseconds
+date           guarda a data somente, de janeiro 1,0001 ate dezembro 31, 9999
+time           store a time only to an accyracy of 100 nanoseconds
+recomendado usar o datetime2 para data, ele representa data e hora
+
+
+Criar tabelas
+CREATE TABLE Produtos ( - criar tabela com nome Produtos
+   Id int IDENTITY(1,1) PRIMARY KEY NOT NULL, - PRIMARY KEY garante que o Id vai ser unico, nao vai se repetir .Tipo IDENTITY  significa que eu quero que o banco de dados vai incrementando os dados,o NOTNULL significa q tem q ter um valor, nao pode ser nulo
+   Nome varchar(255) NOT NULL, entre parenteses tem o numero maximo permitido no campo
+   Cor varchar(50) NULL, - Pode ser nulo, pode omitir não colocando a palavra NULL  ou explicitar como está
+   Preco decimal(13,2) NOT NULL, 
+   Tamanho varchar(5) NULL,
+   Genero char(1) NULL
+ )
+
+
+
+Built-in functions
+são funções pre-existentes que auxiliam na manipulação de dados, como por exemplo contar, somar, media, etc
+
+
+COUNT = ele serve para contar quantas linhas existem na tabela com uma determinada condição
+ex: 
+SELECT COUNT (*) FROM Produtos - conta a quantidade de linhas na tabela
+SELECT COUNT (*) QuantidadeProdutos FROM Produtos - da um nome a coluna criada com a quantidade de linhas
+SELECT COUNT (*) QuantidadeProdutos FROM Produtos WHERE Tamanho = 'M'  vai contar quantas linhas o tamanho é M
+
+SUM - retorna a quantidade de uma coluna somada entre si
+ex: 
+SELECT SUM(Preco) PrecoTotal FROM Produtos - vai somar os valores armazenados na coluna preço
+SELECT SUM(Preco) PrecoTotalTamanhoM FROM Produtos WHERE Tamanho = 'M' - vai somar os valores armazenados na coluna que tem o valor do tamanho  M 
+
+
+MIN, MAX E AVG
+SELECT MAX(Preco) ProdutoMaisCaro FROM Produtos - vai buscar o valor maximo na coluna Preco da tabela Produtos e nomear a tabela que vai ser exibida com o valor requisitado
+SELECT MAX(Preco) ProdutoMaisCaro FROM Produtos WHERE Tamanho = 'M' vai buscar os produto mais caro do tamanho M
+min
+SELECT MIN(Preco) ProdutoMaisBarato FROM Produtos WHERE Tamanho = 'M' - vai buscar o produto mais barato
+Avg média
+SELECT AVG(Preco) Media FROM Produtos WHERE Tamanho = 'M' - vai retornar a media dos produtos
+
+
+concatenar coluna
+SELECT 
+    Nome + ' - ' + Cor + ' - ' + Genero NomeProduto - concatenando a coluna Nome com a Cor e a Genero para exibir o resultado em uma unica coluna chamada NomeProduto
+FROM Produtos
+
+UPPER e LOWER
+UPPER deixa todas as letras maiusculas
+LOWER deixa todas as letras minusculas
+ex:
+ 
+SELECT 
+    Nome + ' - ' + Cor + ' - ' + Genero NomeProdutoCompleto,
+    UPPER(Nome) Nome,
+    LOWER(Cor) Cor
+FROM Produtos
+
+Adicionar nova coluna
+ir no banco de dados, ir na tabela, clicar com o botao direito e selecionar Desing
+Colocar o nome e o tipo
+
+por script
+
+ALTER TABLE Produtos - alterar a tabela Produtos
+ADD DataCadastro DATETIME2 - adicionar Coluna DataCadastro do tipo datetime2
+
+
+UPDATE Produtos SET DataCadastro = GETDATE() - colocar data na coluna toda
+
+excluir uma coluna
+ALTER TABLE Produtos
+DROP COLUMN DataCadastro
+
+Alterar o formato da data 
+SELECT 
+    Nome + ' - ' + Cor + ' - ' + Genero NomeProdutoCompleto,
+    UPPER(Cor) Cor,
+    LOWER(Nome) Nome,
+    FORMAT(DataCadastro, 'dd-MM-yyyy') Data - FORMAT(a-coluna, 'formato-desejado')
+                          dd/MM/yyyy HH:mm - pode colocar com barra, pode tambem colocar a hora e os minutos
+FROM Produtos
+
+GROUP BY
+o GROUP BY agrupa as linhas
+ex:
+1º SELECT 
+     Tamanho,
+     COUNT(*) Quantidade contar a quantidade de tamanho
+2º FROM Produtos
+3º WHERE Tamanho <> '' Onde Tamanho é diferente de vazio
+4º GROUP BY Tamanho  agrupando por tamanho
+5º ORDER BY Quantidade DESC Organizar do menor pro maior
+|
+Ordem que deve ser montado 
+
+
+PK e FK
+Primary key: chave unica que identifica cada registro na tabela
+Foreign Key: Chave que identifica um registro existente em outra tabela
+
+Criando uma tabela de Endereços com Foreign Key
+CREATE TABLE Enderecos (
+Id int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+IdCliente int NULL,
+Rua varchar (255) NULL,
+Bairro varchar(255) NULL,
+Cidade varchar (255) NULL,
+Estado char (2) NULL,
+
+CONSTRAINT FK_Enderecos_Clientes FOREIGN KEY(IdCliente) esse freing key(idcliente) vai referenciar o Clientes(Id)
+REFERENCES Clientes(Id)
+)
+
+vai liga a id da tabela criada com a tabela de Clientes
+
+inserir endereço na tabela criada
+INSERT INTO Enderecos VALUES(4, 'Rua Teste', 'Bairro Teste', 'Cidade Teste', 'sp')
+ 
+olhar o endereço
+select * from Clientes where Id = 4
+select * from Enderecos where IdCliente = 4   ele vai olhar as duas tabelas onde o id do endereço aponta para o id da tabela Clientes
+
+
+Juntar tabelas
+SELECT 
+ *
+FROM
+    Clientes
+INNER JOIN Enderecos ON Clientes.Id = Enderecos.IdCliente - junte a tabela de endereços onde o Cliente.id é igual a Endereços.IdCliente
+WHERE Clientes.Id = 4
+
+fazendo um alias para as colunas
+SELECT 
+ C.Nome,
+ C.Sobrenome,
+ C. Email,
+ E.Rua,
+ E.Cidade,
+ E.Estado
+FROM
+    Clientes C - colocando a letra substitui o nome 
+INNER JOIN Enderecos E ON Clientes.Id = Enderecos.IdCliente 
+WHERE Clientes.Id = 4
+
+
+Constraints 
+são regras que devem ser seguidas para permitir uma inserção em uma tabela
+exemplos:
+NOT NULL -Não permite valor nulo
+UNIQUE - Valor único em toda tabela
+CHECK - garante uma determinada condição
+DEFAULT - valor padrao para inserção
+PRIMARY KEY - é uma combinação de NOT NULL e UNIQUE
+FOREIGN KEY - garante que um registro exista em outra tabela
+
+
+ver as regras da tabela - alt + f1
+
+
+UNIQUE
+ex:
+ALTER TABLE Produtos - alterar a tabela produtos
+ADD UNIQUE(Nome) - adicinar valor unico para a tabela nome
+
+
+CHECK
+ex:
+ALTER TABLE Produtos - alterar a tabela produtos
+ADD CONSTRAINT Chk_ColunaGenero CHECK(Genero = 'U' OR Genero = 'M' OR Genero = 'F')
+adicionar constraint-nomear pra facilitar leitura-garantir a condição( genero so vai aceitar U,M ou F)
+
+
+DEFAULT
+ex:
+ALTER TABLE Produtos - alterar a tabela produtos
+ADD DEFAULT GETDATE() FOR DataCadastro - adicionar valor padrao pegar data() para a coluna DataCadastro
+
+apagar uma Constraint
+ALTER TABLE Produtos - alterar tabela Produtos
+DROP CONSTRAINT UQ_Produtos_7D8FE82D9894E32 - Remover constraint nome da constraint
+
+
+Stored Procedures
+São codigos SQL que você pode salvar diretamente no banco de dados,
+permitindo assim aproveitar um script comumente usado
+
+ctrl + R = esconder telinha de resultado
+
+ex:
+CRATE PROCEDURE InserirNovoProduto    -Criar uma procedure nome da procedure
+@Nome varchar(255),      Coloca os nomes das colunas com um @antes para receber os dados 
+@Cor varchar(50),
+@Preco decimal,
+@Tamanho varchar(5),
+@Genero char(1)
+
+AS
+INSERT INTO Produtos (Nome, Cor, Preco, Tamanho, Genero)   parametros
+VALUES(@Nome, @Cor, @Preco, @Tamanho , @Genero)   insere os dados nos parametros
+
+executar a procedure
+Pode usar EXECUTE ou EXEC
+
+ex:
+EXEC InserirNovoProduto executar a procedure InserirNovoProduto   
+'NOVO PRODUTO PRECEDURE' , - Nome
+'COLORIDO' , - Cor
+50 , - Preco
+'G' , - Tamanho
+'U' - Genero
+
+pode ser assim tbm:
+EXEC InserirNovoProduto 
+@Nome = 'NOVO PRODUTO PRECEDURE' , 
+@Cor = 'COLORIDO' , 
+@Preco = 50 , 
+@Tamanho = 'G' , 
+@Genero = 'U' 
+
+
+
+STORE PROCEDURE com SELECT
+
+CREATE PROCEDURE ObterProdutosPorTamanho  - criar procedure, nome da procedure
+@TamanhoProduto varchar(5) -coluna 
+
+AS
+
+SELECT * FROM Produtos WHERE Tamanho = @TamanhoProduto - select todos de produtos onde tamanho é @tamanhoproduto
+
+
+Executando:
+ex:
+
+EXEC ObterProdutosPorTamanho 'G' - vai obter todos de tamanho G
+
+Obter todos os produtos na procedure
+
+CREATE PROCEDURE ObterTodosProdutos
+
+AS
+
+SELECT * FROM Produtos 
+
+
+EXEC ObterTodosProdutos
+
+
+Functions
+Functions são códigos SQL que você pode salvar diretamente no banco de dados
+semelhante a uma procedure, mas com uso específico e limitações, como por exemplo,
+devem sempre ter um retorno e aceita apenas parâmetros de entrada
+
+SELECT 
+ Nome,
+ Preco,
+ FORMAT (Preco - Preco / 100 * 10, 'N2' ) PrecoComDesconto
+FROM Produtos WHERE Tamanho = 'M'
+
+criando uma function que calcula o desconto
+
+ex:
+CREATE FUNCTION CalcularDesconto (@Preco DECIMAL(13,2), @Porcentagem INT)
+RETURNS DECIMAL(13,2)                   
+
+BEGIN
+     
+     RETURN @Preco - @Preco / 100 * @Porcentagem
+
+END
+
+
+
+
+
