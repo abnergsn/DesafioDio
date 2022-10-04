@@ -1,0 +1,574 @@
+HTTP
+
+HyoerText Transfer Protocol (HTTP)
+Definido pelos RFCs 1945 e 2116
+Protocolo de comunicação
+Browser -> implementa o cliente HTTP
+Servidor -> host objetos web
+
+Arquitetura Client-server
+cliente 
+Mensagens Request HTTP - Objetos Web
+
+Servidor
+Mensagens Response HTTP - Protocol TCP
+
+Mensagens HTTP
+REQUEST, RESPONSE E POST
+
+ARMAZENAMENTO
+TRANSMISSÃO
+RECONSTRUÇÃO
+
+
+REQUEST HEADER
+determina qual o tipo de arquivo, se e json ou xml
+Content-Type:application/json
+Accept:application/json
+
+objetivo do xml e do json
+Serialization- serialização dos dados que e um processo de transformação dos dados para que haja comunicação entre as partes, fazendo o processo de armazenar, transferir e recuperar as informações
+comunicação
+MXL
+metadados -: dados, username , password, data , autenticacao
+JSON
+Lighweight
+Idependente de ling
+simples
+estrutura de chave e valor
+
+COMUM no XML e JSON
+Auto descritivos
+hierarquicos
+idenpendentes de linguagem de prog
+vasta utilização
+
+DIFERENÇAS
+xml - tags
+json - sucinto 
+json - permite utilização de vetores
+
+
+
+HTTP Request
+estrutura                              texto em ASCII
+                      Request Line
+    metodo http ->       Get:/somedir/page.htmlHTTP/1.1 <- versao
+                         |Host:www.somes        <- URL  |
+    Tipo de conexão    ->|Connection:close              |<-Header Line
+    Agente             ->|User-agent:Mozilla/5.0        |
+Pref.do Cliente idioma ->|Accept-language:fr            |
+
+  Agente que esta realizando a requisição ex:browser, aplicação java
+    
+METODOS HTTP
+GET     - solicita um recurso do servidor
+HEAD    - GET sem corpo de resposta
+POST    -  submete uma entidade a um processo
+PUT     - substituição de recursos pelos dados da requisição
+DELETE  - remoção de um recurso
+TRACE   - chamada de loop-back a um determinado recurso
+OPTION  - opções de comunicação com recurso
+CONNECT - tunelamento identificado pelo recurso
+PATCH   - modificação parcial
+
+Metodos seguros
+GET 
+POST             Operações de leitura (Read-Only)
+OPTION            metodos que quando são executados não modificam o servidor
+                    SAFE METHODS ->   IDEMPONTETES -> sempre vai acontecer a mesma coisa
+nem todo metodo idempotente é um metodo seguro
+
+HTTP Response
+       Statusline     ->| HTTP/1.1 200 OK <-versao de protocolo e status code 
+   tipo de conexao  ->  | Connection:close                             |
+      data          ->  | Date:Tue, 09 Aug 2011 15:44:04GTM            | <-Header lines
+      servidor      ->  | Server:Apache/2.2.3(CentOS)                  |
+                        | Last-Modified:Tue,09 Aug 2011 15:11:03GTM    |
+        header body   ->  Content-Length:6821
+        tipo de dado  ->  Content-Type:text/html
+
+          Entity body  -> (data,data,...)
+
+Campos
+entity header
+entity body
+
+entity-header = Allow
+              | Content-Encoding
+              | Content-Language
+              |Content-Length
+              |Content-Location
+              |Content-MD5
+              |Content-Range
+              |Content-Type
+              |Expires
+              |Last-Modified
+              |extension-header
+extension-header = message -
+
+
+O campo Accept define quais os conteudos o servidor ou cliente vai aceitar
+ex:
+    Accept       = "Accept" ":"
+                   #( media-range [ accept - params ] )
+
+    media-range  = ( "*/*"
+                 | ( type "/" "*" )
+                 | ( type "/" subtype )
+                 ) *( ";" parameter )
+accept-params = ";" "q" "=" qvalue *(accept-extension )
+accept-extension = ";" token [ "=" ( token | quoted-string ) ]
+
+
+Status code
+200 OK: request bem sucedida e objeto enviado
+301 Moved Permanently : Objeto realocado nova URL no campo Location
+400 Bad Request : Resposta genérica - servidor não entendeu a mensagem
+404 Not Found: o documento solicidato é inexistente
+505 HTTP Version Not Supported: Versao do procolo não suportada pelo servidor
+
+
+Classificação dos Status Code
+Information response (100 -199)
+Sucessful response (200-299)
+Redirection response (300-399)
+Client error response (400-499)
+Server error response (500-599)
+
+Web distributed authoring and versioning
+
+102- Processing
+207- Multi-Status
+208- Already Reported
+422- Unprocessable Entity
+423- Locked
+424- Failed Dependency
+
+
+ex:
+o cliente quando esta utilizando webdata ele vai bloquear o recurso(LOCK)e vai dar um PROPFIND para tentar recuperar as propriedades que podem ter sido armazenadas utilizando o xml ou algum outro modelo dentro do recurso do servidor, depois ele faz um get para puxar essas informações se precisar modificar ele faz um PUT e depois desbloqueia o recurso 
+
+
+
+
+client/Useragent                          HTTP Server With WebDAV extention
+                       LOCK ---------------> 
+                       <-------------Profind
+                       <-----------------GET
+ (save resource)       PUT----------------->
+ (close resource)      UNLOCK-------------->
+
+
+
+WebDav
+Web Distributed Authoring and Versioning
+Webpage Meta: Add, deletar, retrieve
+Linkg pages
+Criação de conj. de documentos
+Copy e move
+Lock: documento editado -1
+
+
+
+
+O HTTP e Stateles e possui o modelo Client/Server
+NÃO GUARDA INFORMAÇÕES DO CLIENTE PARA FICAR MAIS PERFOMATICO
+PESA NA PARTE DE UTILIZAÇÃO DE BANDA OVERHEAD
+
+Se precisarmos identificar um cliente?
+
+
+O que são cookies?
+Pequenos pedaços ou blocos de dados criados e utilizados pelo servidor
+para persistir dados no dispositivo do cliente
+especificação: RFC 6265
+ 
+HEADER FILE - onde ficam os cookies
+
+cliente vai ter o primeiro acesso na pagina da amazon, o servidor olha o no banco de dados se o id do cliente existe, se existe ele atualiza as informaçoes, caso contrario o servidor vai setar o id dentro do coockie file 
+file cookie
+add...
+      Id user
+      Id name
+
+cookies de sessao
+a partir do momento em que a conexão se encerra eles sao excluidos
+cookies persistentes
+não sao excluidos no momento em que a conexão se encerra
+ex de cookies: manter logins ativos, informação de websites
+Hacking, LGPD & Cookies
+cookies coletam informação e acabou entrando na lgpd e ele solicita seu concentimento pois guardam muitas informações pessoais
+
+
+Cache
+web cache
+proxy server
+guardam informações para serem carregadas mais rapidamente
+
+ex:
+
+
+usuario             servidor proxy                                    HTTP server 
+solicita           verifica se tem no banco de dados                      
+                        se sim         
+                   (verifica se precisa de atualização no servidor     toma a att! - ou mande assim msm!
+ tame!          <- atualiza o banco de dados e envia p usuario)
+                         se não                            
+ tame!          <-(oia, tu tem o arquivo bixo safadu?se tive ja       tenhu, ent tomi!  ou
+                    mi passi ligero miseravi                              tenhu n!              
+                    recebe o arquivo, guarda no banco de dados
+   n tenhu!     <-  e envia pro cliente) ou tenhu n
+
+Redução do tempo de resposta
+Redução do tráfego
+
+
+
+HTTP 2.0
+estabelece uma conexao principal persistente entre cliente e servidor, e envia requisições de maneira idependentes
+posso fazer varias requisições e recebelas em ordem diferente
+o mapeamento feito pelo 1.1 foi melhorado pelo 2.0
+multiplexação de canais
+Priorização de recursos utilizando pesos, quando um cliente faz uma busca e uma pagina, no 1.1 não há uma rodem, no 2.0 pode ser configurado ex: uma aba pode ser carregada antes do corpo. 
+
+HTTP 1.1
+formato geral de uma requisição http
+                            header
+Request Line     method | sp | URL | sp | version | cr | if|
+header lines{   header field name: | sp | value | cr | if|
+  
+                header field name: | sp | value | cr | if|
+             } 
+                            Payload 
+blank line      |cr|if|
+entity body     |                                              |
+
+HTT9 2.0
+ Streaming ID header {   | method | sp | URL | sp| Version |cr| if  |
+                         | header field name | sp | value | cr | if |
+                         |                                          |
+                         | header field name | sp | value | cr | if |
+                      }
+Streaming ID data     {
+
+                      }
+
+                                   segmentação - Streaming
+
+
+Reutilização do Header por referencia
+Push - enviar todos os dados para o cliente quando ele solicita uma parte
+ele manda tudo relacionado a pagina/ deve ser configurado no cliente e no servidor
+Features
+*Unica conexão persistente
+*Compressao de header
+*Server push
+*HTTPS por padrao -TLS
+*Negociação no handshake
+
+Contras
+Push - configuração incorreta
+
+mixe 1.1 e 2.0
+lentidao
+load balancer - HTTP 1.1
+
+
+Servidores/Sistemas HTTP
+apache http server progect  35% usado no mercado 
+datado de 1995
+contribuição c/ WWW
+Opensource & free
+Comunidade: Apache Software Foundation
+Modular, dinâmico e carregável
+Multiple Request Processing modes (MPMs)
+Altamente escalável(+10,000 conexões simultâneas - facil)
+Lida com arquivos estáticos, index, aouto-indexing e negociação de conteúdo
+TSL/SSL via OpenSSL ou wolfSSL
+Servidores virtuais com endereços baseados em IP ou nome
+Compatibilidade com IPV6
+Suporte à versao 2.0 do HTTP
+Proxy reverso, websocket...
+
+XAMPP 
+Pacote/ambiente
+apache server
+MariaDB
+Interpretadores script - PHP/Perl
+OpensSSL, phpMyAdmin, MediaWki, Joo mla, Wordpress...
+Voltado para teste e desenvolvimento 
+S/ acesso internet
+
+NGINX     33% usado pelo mercado
+Servidor 
+foi lançado em 2004
+web server
+proxy reverso
+load balancer
+mail proxy
+HTTP cache
++ 10mil conexões simultaneas
+lida com arquivos estaticos, index, auto-indexing
+TSL/SSl com SNI via OpenSSl
+suporte a HTTP 2.0
+Compativel com IPV6
+FastCGI SCGI, uWSGI com cache
+Suporte a gRPC (V 1.13.10)
+Servdores virtuais baseados em IP e nome
+Websocket desde 1.3.13
+URL rewriting and redirection [35] [36]
+
+
+WIRESHARK
+Ferramenta muito utilizada para fazer diagnosticos e testes
+
+
+Segurança da informação
+criptografia por chave
+certificado digital
+
+chave assimetrica
+chave privada : Assinatura - criptografia
+chave publica: verificação de autenticidade
+
+chave simétrica
+chave unica privada
+conhecimento previo da chave
+Cifra de fluxo
+mapeamento bit a bit
+sequencia de bits pseudo-aleatorio
+mapeamento 1 para 1
+bits de entrata f(x) -> fluxo de bits -> dados cifrados
+
+
+Cifra de bloco - SSL, PGP,Ipsec
+Bloco de bits
+k=numero de bits
+ex k = 64
+mapear o bloco de forma a permutar por outro valor para mascarar a real informação
+esse mapeamento é feito de 1 para 1, de bloco por bloco
+ex 
+k=3
+010 110 001 111 -> 101 000 111 001
+vai ser permutado 010
+entrada      saida       entrada    saida
+000           110          100       011
+001           111          101       010
+010           101          110       000
+011           100          111       001
+
+Possibilidades?
+mapeamento por permutação
+8! 
+40.320
+na pratica
+encadeamento de cifras = Permutação -> mapeamento por funções k>64 1,844674407*10^19
+
+como transferir a chave?
+
+Funcionamento
+substituição da letra pela k-ésima do alfabeto 
+Rotatividade do alfabeto
+ex: Bob, I love you. Alice
+k=3 
+    Ere, I oryh brx.Dolfh - frase mapeada por k=3  , 3 letras a frente
+
+
+
+Certificado digital
+certificação de chave
+o que é certificar uma chave?
+comprovar autenticidade
+
+Entidade certificadora
+Certification Authority CA
+verificação de identidade
+emissao de certificados que garantem autenticidade
+Padroes de autoridades certificadoras
+IETF - recomendação ITUX.509
+Especificação de um serviço de autenticação e sintaxe de certificados
+RFC 1422
+Gerenciamento de chaves baseado em CA em emails seguros
+
+Protocolo SSL
+Secure Socket Layer - SSL
+Segurança para conexões TCP
+Confidencialidade
+Integridade
+Autenticidade end-point
+
+cenario de ataque  
+CENARIO 1   
+
+Listening- ta so ouvindo, vendo as informaçoes que estao sendo trafegadas
+                         requestHTTP
+pcusuario  --------> nuvem -----------> servidor
+                  |
+                  |
+UsuarioMalicioso pacote com os dados
+
+CENARIO 2
+Ataque ativo
+o usuario malicioso esta modificando alguma informação dentro daqueal request para se benecficiar
+quando se utiliza o HTTPS impossibilita o usuario malicioso a fazer um pishing, alguma modificação aos dados que estao sendo trafegados
+
+o ssl ele permite que os dados sejam lidos por quem tem a chave relacionada
+
+
+Operações do SSL & HTTPS
+3 fases
+           
+handshake      key derivation data     transfer
+
+estabelecendo conexão TCP
+
+handshake
+
+usuario               servidor
+TCP starts       ->
+                 <-  TCP responce
+TCP confirmation ->
+
+verificação de autenticidade
+
+
+usuario               servidor
+SSL Hello       ->
+                 <-  Certification
+                      essa certificação possui chave publica que vai ser utilizada para criação da EMS
+
+EMS=encripted master secret key
+EMS = Kb+MS
+      chave de b + master secret key do cliente
+EMS vai ser utilizada para descriptografar as informações
+só funciona para a sessao que foi criada
+
+SEK = session ecrypted key
+
+MS =    EA = SEK de alice para bob
+        MA = MAC de alice para bob
+        EB = SEK de bob para alice
+        MB = MAC de bob para alice
+
+Operação - fases
+transferencia efetiva de dados
+Record+Mac
+verificação de integridade da mensagem
+data stream = Record + Mac + ... + Record + Mac
+
+HTTPS é o HTTP + SSL 
+Segurança na comunicação - HTTP
+   Over TCP
+Verificação d autenticidade por certificados digitais
+Porta 443
+Maioria dos sites utilizam a versao segura
+Proteção contra fishing 
+Privacidade 
+ 
+
+  LGPD - lei geral de proteção de dados
+promulgada em 2018
+entrou em vigor em agosto de 2020
+Lei de segurança da informação
+nº13.709/2018
+Foi baseado nas GDPR - General Data Protection Regulation- legislação europeia e
+Legislação do estado da California - EUA
+
+O que a lei protege ?
+Dados de identificação dos usuarios
+Dados sensiveis, Religiao, etnia, cpf,cnpj
+Define o tratamento de dados
+Diversos tipos de operações
+Livre consentimento
+Direitos do titular das informações
+Sanções aos que descumprirem as regras
+
+Criação da ANPD(Agencia Nacional de proteção de dados)
+zelar pela proteção dos dados
+elaboração de diretrizes para politica nacional de proteção
+promover conhecimentos das normas
+editar regulamentos
+realizar auditorias
+quem deve seguir a lei?
+empresas que precisam manter um BD, Funcionarios e usuarios
+Devem garantir ao titular sigilo das informações
+
+
+WebSocket
+uma conexão bidirecional implementada via API
+ex: twitter, games...
+as informações são atualizadas por segundo, se fosse pelo http geraria um overhead
+
+Protocolo via API
+utiliza todas as infraestruturas existentes no http
+
+porta 80 e 443
+voltada para aplicações de tempo real
+http nao lida bem com esse tipo de conexão bidirecional que atualiza de segundo em segundo
+
+WebSocket  
+fases
+handshake  data transfer
+handshake simplificado de 2 vias, torna conexões mais rapidas
+usuario      servidor
+  syn ------>
+      <------ syn ack
+
+Definição
+O protocolo fornece comunicação cliente/servidor executando um codigo não
+confiavel em um ambinte controlado para o host que escolheu essa comunicação
+
+só aceita formato JSON
+
+Filosofia do WebSocket
+1. Origin-base security model
+2. Endereçamento e protocolo
+3.Camadas -> enquadramento on top TCP
+4.Encerramento do handshake
+
+Outras caracteristicas
+Campos Sec-...: No Edition - usuario malicioso nao consegue modificar esse campo
+Idependente do TCP
+Interpretação do HTTP server
+Porta 443
+
+    
+Comunicação na internet
+proxy
+HTTP server
+DNS - Domain Name System
+Socket
+Load balancer
+
+TCP/IP MODEL
+APLICAÇÃO
+TRANSPORTE
+REDE
+ENLACE
+
+dado um cenario onde se tem um cliente um servidor dns e um servidor apache, como a comunicação ocorre entre eles?
+quando vai se iniciar uma conexão o cliente envia um pacote ate o dns perguntando, qual que é o ip que esta associado a esse dominio aqui? o dns responde com essa informação
+a partir dai o cliente é capaz de iniciar uma conexão com o apache, servidor http e iniciar as requisições
+Quando inicia-se uma requisição, primeiramente inicia-se o SOCKET TCP
+SOCKET TCP -> uma conexão via camada de transporte, onde há uma identificação ip e porta com a conexão da camada superior(camada HTTP) e faz um mapeamento da camada em que ele esta e da camada superior
+IP:port_number
+
+
+Proxy
+se os objetos web estao em cash, vou entrar em contato com o proxy e ele vai me enviar o que eu pedi
+se não tiver no proxy, vai ser feito um update, criar uma nova conexão com o servidor web receber as informações, repassar as informações via payload no response da requisição original do meu cliente
+
+
+
+
+
+
+
+
+
+
+
+
+
+
