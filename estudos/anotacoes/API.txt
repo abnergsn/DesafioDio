@@ -1,0 +1,162 @@
+API e Entity framework
+
+Uma API (Application Programming Interface) é uma forma de comunicação
+entre computadores ou programas de computadores
+Em outras palavras, é um software que fornece informaçõess para outro software
+
+exemplo: comparando uma API com um cenario de um restaurante
+
+      cliente               garçom                         cozinheiro
+application/costumer       Waiter(garçom)/API       Kitchen(cozinheiro)/Server
+
+
+o cliente chega ao restaurante, olha o cardapio, ser atendido pelo garçom, o garçom anota seu pedido e vai para a cozinha, na cozinha ele passa o pedido para o cozinheiro, o cozinheiro prepara ou nao a comida, o garçom leva a comida da cozinha para o cliente 
+o garçom é a API, ele faz a intermediação entre cliente e cozinha
+  
+a comunicação ocorre com a entrada, que é o pedido que o cliente deseja, tem o processamento que e o ato de ir na cozinha pedir a solicitação do cliente e retornar para ele quando estiver pronto, e a saida quando retornou para o cliente com a requisição(comida)
+entrada, processamento e saida
+
+ex: compra no site de ecommerce
+cliente entra na aplicação, faz o pedido e clica em comprar , o website ou aplicação chama a API para registrar a venda no banco de dados, o servidor da o OK de produto vendido para a API e a API  retorna para a aplicação com a mensagem de sucesso 
+quem se comunica com o banco de dados é a API
+intermediario que conversa com a aplicação e servidor
+agente de integração
+pode ser online ou offline
+
+
+
+Nager.Date: https://date.nager.at
+Dogs: https://dog.ceo/dog-api
+
+
+
+Criando uma API
+abrir uma pasta no VS CODE
+NO TERMINAL: dotnet new webapi
+Para executar: dotnet watch run
+o watch fica observando os arquivos da api e caso identifique uma mudança ele compila automaticamente
+
+Swagger - ferramenta que auxilia a testar e documentar as APIs
+
+Controller
+uma controller é uma classe que vai agrupar as requisições HTTP e disponibilizar seus endpoints
+
+
+[ApiController]
+[Route("[controller]")]
+public class UsuarioController : ControllerBase
+{
+ 
+  [HttpGet("ObterDataHoraAtual")]
+  public IActionResult ObterDataHora()
+  {
+   var obj = new
+    {
+    
+      Data = DateTime.Now.ToLongDateString(),
+      Hora = DateTime.Now.ToShortTimeString()
+    };
+   
+    return Ok(obj);
+  }
+  
+  [HttpGet("Apresentar/{nome}]
+  public IActionresult Apresentar(string nome)
+    {
+     var mensagem = $"Olá, {nome} seja bem vindo!"
+     return Ok(new {mensagem});
+    }
+
+}
+
+
+Entity Framework
+O EF é um framework ORM (Objecti-Relational Mapping) criado para facilitar
+a integração com o banco de dados, mapeando tabelas e gerando comandos SQL
+de forma automática.
+
+CRUD
+C - CREATE (insert)
+R - READ (select)
+U - UPDATE (update)
+D - DELETE (delete)
+
+Instalando o Entity Framework - instalar na maquina
+dotnet tool install --global dotnet-ef
+instalando os pacotes do entity framework - instalar no projeto 
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+
+
+
+
+entidade é uma classe no programa e é uma tabela no sql 
+
+
+foi criado uma classe entity com o nome contato e dentro dela foi colocado dados de contato
+{} appsettings.Development.json - usado para desenvolvimento
+{} appsettings.json - usado para produção
+
+
+Foi criado uma classe Contexto para fazer a conexão com o banco de dados
+ex:
+namespace Modulo_API.Context
+{
+    public class AgendaContext : DbContext
+    {
+      public AgendaContext(DbContextOptions<AgendaContext> options) : base(options)
+      {
+  
+      }
+
+      public DbSet<Contato> Contatos{ get; set; }
+     }
+}
+
+Configurar a conexão no Arquivo Json
+
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+"ConnectionStrings": {
+  "ConexaoPadrao": "Server=localhost\\sqlexpress; Initial Catalog=Agenda; Integrated Security=True"
+ }
+}
+
+"Server=localhost\\sqlexpress; = a conexão do servidor do banco de dados que ja foi criada anteriormente
+ Initial Catalog=Agenda = nosso banco de dados, ele nao existe mas o entity framework vai crialo automaticamente
+Integrated Security=True" = Autenticação
+
+adicionar um dbcontext do tipo agenda context e passando algumas opçoes, agenda context use o sql server, pega a configuração do {}appsettings o getConnetionSting vai pegar alguma chave da connection string e o nome da minha conexão chamada de ConexaoPadrao
+
+builder.Services.AddDbContext<AgendaContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("ConexãoPadrao")));
+
+
+Migrations
+os comandos de criação de tabelas deve ser feito manualmente, dizendo ao entity que tem alterações no codigo que devem ser refletidas no banco de dados
+
+dotnet-ef migrations add CriacaoTabelaContato
+chamando a ferramenta EntityFrameword do dotnet, migrations que é a ferramenta que vai atualizar o banco de dados, e adicionar um nome para a tabela
+
+dotnet-ef database update
+compilar o projeto e atualizar o banco de dados
+
+
+Verbos HTTP
+HTTP Verb     CRUD              Entire Collection(e.g./costumers)                                                                                   Specific item
+  POST       Create             201(Created)."Location" header with link to /customers{id} containing new ID                           404(Not Found) 409(Conflict) if resource already exist
+  GET        Read               200(Ok).List of customers Use pagination, sorting and filtering to navigate big lists                  200(OK)single costumer 404(Not Found) if ID not found or invalid
+  PUT        Update/Replace     405(Method Not Allowed) unless you want to update/replace every resource in the entire collection      200(OK) or 204(No Content) 404(Not Found) if ID not found or invalid
+  PATCH      Update/Modify      405(Method Not Allowed) unless you want to modify the collection itself                                200(OK) or 204(No Content) 404(Not Found) if ID not found or invalid
+  DELETE     Delete             405(Method Not Allowed) unless you want to delete the whole collection -- not often desirable          200(OK) 404(Not Found) if ID not found or invalid            
+
+PATCH - passa parte da informação ex: atualizar somente o telefone da lista de contatos
+PUT - tem que atualizar todas as informações da tabela ex: nome, telefone, ativo.
+
+ 
+

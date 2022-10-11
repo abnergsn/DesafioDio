@@ -18,3 +18,21 @@ dotnet sln add exemplo/exemplo.csproj
 code . 
 ativar omnisharp / visual code / apertar f1 / digitar omnisharp e escolher o projeto sln
 
+
+ dotnet new webapi
+dotnet watch run
+
+
+Instalando o Entity Framework - instalar na maquina
+dotnet tool install --global dotnet-ef
+instalando os pacotes do entity framework - instalar no projeto 
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+
+
+dotnet-ef migrations add "NomeTabela"
+
+dotnet-ef database update
+compilar o projeto e atualizar o banco de dados
+
+
