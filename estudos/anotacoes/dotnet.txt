@@ -30,9 +30,13 @@ dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 
 
-dotnet-ef migrations add "NomeTabela"
+dotnet-ef migrations add "NomeTabela" sem aspas
 
 dotnet-ef database update
 compilar o projeto e atualizar o banco de dados
+
+criar projeto MVC- dotnet new mvc
+
+
 
 

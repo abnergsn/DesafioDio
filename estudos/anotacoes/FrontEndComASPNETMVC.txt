@@ -1,0 +1,23 @@
+Frontend com ASP.NET MVC
+
+O padrão MVC
+O padrão de arquitetura MVC(Model-View-Controller) separa um aplicativo em três
+grupos de compontentes principais: Modelos, Exibições e Componentes. Esse padrão
+ajuda a obter a separação de interesses
+
+Model - representar uma entidade do nosso dominio ex: Contato
+View - pagina que o usuario vai enchergar, pagina html exibida na tela do usuario, exibe dados da Model
+Controller - Responsabilidade de ligação, nela que ocorre toda a logica. Ex: acessar a pagina de Contatos, a controller vai identificar que vc esta tentando acessar uma listagem de contatos ela vai no banco buscar essa model, depois ela vai jogar para view para exibir os dados
+
+criar projeto MVC- dotnet new mvc
+
+
+a ContatoController vai ter um "Index" para listar todos os contatos no banco, vai ter uma pagina de criação para criar os contatos, uma pagina de edição, uma pagina de delete e uma pagina de detalhes caso queira ver os detalhes do contato
+
+o MVC mistura codigos c# com html - ponto negativo pq mistura os codigos
+
+No MVC é opcional colocar o metodo http GET
+
+
+
+
