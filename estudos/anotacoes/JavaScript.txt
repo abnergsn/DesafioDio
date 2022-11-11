@@ -1,0 +1,215 @@
+JavaScript
+javascript
+linguagem de programação de alto nivel, que integra o desenvolvimento de apps e paginas web
+é uma das linguagens de programação mais usadas no mundo do desenvolvimento
+serve para criar scripts dinâmicos que realizam a interação de apps ou paginas web
+HTML é estrutura, o CSS é o design, o javascript é a parte interativa do desenvolvimento
+podemos usar o javascript de varias formas, seu uso mais comum se da no 
+desenvolvimento de apps e páginas web, juntamente com as linguagens HTML e CSS
+
+
+
+Declarar variaveis
+let variavel = 10;
+const pi = 3.14;
+
+let -> variavel / muda valor
+const -> constante / nao muda valor
+console.log('imprimir algo');
+
+comentarios /*   comentario
+       comentario
+comentario */
+
+rodar o codigo:
+node aula.js
+node + o nome do arquivo
+
+arredondamento
+converter a variavel em texto
+console.log(valorGasto.toFixed(2));
+                               |
+                 quantidade de numeros apos a virgula
+
+declarar booleano
+const algumaCoisa = true;
+<>= => =<
+% = resto da divisão
+
+const numero = 10;
+const numeroPar = (numero % 2) === 0;
+
+console.log(numeroPar);
+ 
+1 = é para atribuição
+2 == é para comparar igualdade ignora o tipo(faz conversao implicita de texto para numero)
+3 === é para comparar igualdade nao ignora o tipo e apresenta false caso os tipos sejam diferentes
+
+if () {
+
+}
+ ! signifa negação
+ex: se o numero nao for par execute tal parada
+ if (!numeroPar) {
+    console.log('impar');
+}
+
+else
+if (numeroPar) {
+    console.log('par);
+} else {
+    console.log('impar');
+}
+
+Math.pow(altura,2)
+Math é uma biblioteca matematica, o .pow é uma função para potencias, coloca-se a variavel 'altura' e coloca o numero da potencia 
+
+
+Funções
+são pequenos trechos de codigos que podemos executar a qualquer momento
+executa o bloco de codigo sem precisar ficar repetindo
+declarar funçao
+function teste() {
+   console.log('teste');
+}
+teste();
+
+invocar uma função
+teste( );
+  |    |
+  |    parametro
+objeto
+ex:
+function sayMyName(name) {
+   console.log('Your name is:' + name);
+}
+sayMyName('Renan');
+sayMyName('Vitor');
+função sem retorno sao chamadas de procedimento
+
+function quadrado(valor) {
+ return valor * valor;
+}
+
+const quadradoDeDez = quadrado(10);
+console.log(quadradoDeDez);
+ex: 
+function incrementarJuros(valor, percentualJuros){
+ const valorDeAcrescimo = (percentualJuros /100) * valor;
+ return valor + valorDeAcrescimo;
+}
+console.log(incrementarJuros(100, 10));
+
+função imediatamente invocada
+essa função so existe dentro do parenteses por que nao tem mais nome para referenciala
+faz bastante em web, cria essas funções para isolar o escopo de codigo
+para executar o codigo uma vez so 
+(function () {
+    const altura = 1.78;
+    const peso = 75;
+    const imc = calcularImc(peso, altura);
+    console.log(classificarImc(imc));
+}) ();
+
+sintaxe objeto literal
+objeto é uma coleção de valores e funciona atraves de chave e valor
+objeto é uma coleção dinâmica de chave e valor
+ex:
+const bnero = {
+  nome: 'bnero nero',
+  idade: 28
+};
+
+console.log(bnero.nome);
+console.log(bnero.idade);
+console.log(bnero);
+
+da para incrementar fora das chaves
+bnero.altura = 1.78;
+console.log(bnero);
+
+função dentro de um objeto é chamada de método
+o 'this' assume o objeto
+ex:
+const bnero = {
+  nome: 'bnero nero',
+  idade: 28,
+
+ descrever : function(){
+      console.log('Meu nome é {this.nome} e minha idade é &{this.idade}')
+ }
+};
+
+tem como acessar as informações atraves de uma string para fazer as coisas dinamicas
+
+classes
+definir o objeto para ser instanciado
+na sintaxe de classe quando eu declarar um metodo nao precisa colocar a palavra function
+classe e uma definição do que o objeto deveria ser e uma instancia ocorrencia de um objeto
+class Pessoa{ 
+
+ nome;
+ idade;
+ 
+ descrever() {
+       return console.log(`Meu nome é {this.nome} e minha idade é &{this.idade}`)
+ }
+ 
+} 
+
+const bnero = new Pessoa();
+bnero.nome = 'bnero nero'
+bnero.idade = 28;
+
+const renan = new Pessoa();
+bnero.nome = 'renan renan'
+bnero.idade = 30;
+
+bnero.descrever();
+renan.descrever();
+
+
+metodo é uma ação dentro de um objeto
+
+
+arrays 
+as listas sempre começam a contar do zero 
+declarar uma lista
+
+const lista = [];
+  lista.push(0);
+  lista.push(1);
+  lista.push(2);
+  lista.push(3);
+  lista.push(4);
+  lista.push(5);
+  lista.push(6);
+  lista.push(7);
+  lista.push(8);
+  lista.push(9);
+  lista.push(10);
+ou assim
+ const lista = [0,1,2,3,4,5,6,7,8,9,10];
+
+alunos.push('teste') - adiciona um item na lista de array
+alunos.pop(alunos.pop); - tira o ultimo, tira da lista e imprime na tela
+.shift é o contrario do pop
+
+saber o tamanho da lista
+console.log(notas.lenght);
+
+usando for loop
+para percorrer dinamicamente os itens de uma lista
+     declarando a variavel começando no zero          estrutura condicional(enquanto index for menor que o tamanho do array)      incrementando o index ate que complete a estrutura condicional              
+for (let index = 0;                                   index < array.length;                                                       index++) {
+     const element = array[index]; 
+}
+
+const nome = 'bnero nero nero';
+
+for (let i = 0; i < nome.length; i++) {
+     const letra = nome[i];
+     console.log(letra);
+ }
+
+
